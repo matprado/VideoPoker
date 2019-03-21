@@ -1,4 +1,5 @@
 package VideoPoker;
+
 public class Carta {
 	private int valor;
 	private int naipe;
@@ -7,6 +8,7 @@ public class Carta {
 		this.valor = valor;
 		this.naipe = naipe;
 	}
+	
 	/**
 	 * 
 	 * @return Valor da carta, de 0 a 12 (Onde 0 é Ás e 12 é Reis);
@@ -14,6 +16,7 @@ public class Carta {
 	public int getValue(){
 		return this.valor;
 	}
+	
 	/**
 	 * 
 	 * @return Retorna o naipe da carta. Onde 0 é Paus, 1 é Copas, 2 é Espadas e 3 é Ouros.
@@ -21,6 +24,7 @@ public class Carta {
 	public int getNaipe() {
 		return this.naipe;
 	}
+	
 	@Override
 	public String toString() {
 		String aux = new String();
