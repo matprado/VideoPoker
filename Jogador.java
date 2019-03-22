@@ -1,50 +1,49 @@
 package VideoPoker;
 
 /**
- * Essca classe representa o jogador com suas cartas e moedas
+ * Essca classe representa o jogador com sua mão de cartas e suas moedas
  * @author Mateus Prado(10851707) e Matheus Tomieiro(10734630)
  *
  */
 public class Jogador {
 
-	private Carta[] mao;
-	private int n;
-	private double moeda;
-	private Baralho deck;
+	private MaoDeCartas mao;
+	private Moeda moedas;
 	
 	/**
-	 * Contrutor inicializa as cartas, as moedas e o baralho
-	 * @param n - quantidade de cartas na mão
-	 * @param moeda - quantidade de moedas
+	 * Contrutor padrão que inicializa a mão de cartas e as moedas na regra padrão de jogo
 	 */
-	public Jogador(int n, double moeda) {
-		this.n = n;
-		deck = new Baralho();
-		this.moeda = moeda;
-		mao = new Carta[n];
-	}
-	/**
-	 * Método para pegar n cartas do baralho
-	 */
-	public void pegaCartas() {
-		mao = deck.getCartas(n);
-	}
-	/**
-	 * Método para pegar cartas do baralho indicadas pela string
-	 * @param quais - string com as cartas a serem modificadas
-	 */
-	public void pegaCartas(String quais) {
-		Carta[] aux = new Carta[1];
-		int num = 0;
-		for(int i=0; i<quais.length(); i++) {
-			if(quais.charAt(i) != ' ' && quais.charAt(i) != '\0') {
-				aux = deck.getCartas(1);
-				num = Character.getNumericValue(quais.charAt(i));
-				mao[num-1] = aux[0];
-			}
-		}	
+	public Jogador() {
+		mao = new MaoDeCartas();
+		moedas = new Moeda();
 	}
 	
+	/**
+	 * Contrutor inicializa a mão de cartas e as moedas
+	 * @param cartas - quantidade de cartas na mão
+	 * @param moedas - quantidade de moedas
+	 */
+	public Jogador(int cartas, int moedas) {
+		mao = new MaoDeCartas(cartas);
+		this.moedas = new Moeda(moedas);
+	}
+	
+	public void aposta(int n) {
+		
+	}
+	
+	@Override
+	public void toString() {
+		
+	}
+	
+	
+	/**
+	 * Método para embaralhar, ou seja, se perde as cartas que estavam na mão no jogador voltando ao baralho(situação inicial).
+	 */
+	public void Embaralha() {
+		mao = new MaoDeCartas();
+	}
 	
 		
 }

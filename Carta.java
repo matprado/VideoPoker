@@ -1,5 +1,10 @@
 package VideoPoker;
 
+/**
+ * Essca classe representa uma carta com um valor e um naipe;
+ * @author Mateus Prado(10851707) e Matheus Tomieiro(10734630)
+ *
+ */
 public class Carta {
 	private int valor;
 	private int naipe;
