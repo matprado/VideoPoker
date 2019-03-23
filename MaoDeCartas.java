@@ -64,16 +64,34 @@ public class MaoDeCartas {
 	
 	public int aposta(int valor) {
 		int [] contagem = contarCartas();
-		if(this.maiorOcorrencia() == 1) {
+		int resultado = 0;
+		int maisFrequente = this.maiorOcorrencia();
+		int segundoMaisFrequente = this.segundaMaiorOcorrencia();
+		
+		if(maisFrequente == 1) {
 			/*STRAIGHT, FLUSH, STRAIGHT FLUSH E ROYAL STRAIGHT FLUSH*/
-		}
-		else if(this.maiorOcorrencia() == 2 && this.segundaMaiorOcorrencia() == 2) {
-			/*Dois Pares*/
-		}
-		else if(){
 			
 		}
+		if(maisFrequente == 2 && segundoMaisFrequente == 2) {
+			/*Dois Pares*/
+			resultado = valor;
+		}
+		if(maisFrequente == 3){
+			if(segundoMaisFrequente == 2) {
+				/*FULL HAND*/
+				resultado = valor * 20;
+			}
+			else {
+				/*TRINCA*/
+				resultado = valor * 2;
+			}
+		}
+		else if(maisFrequente == 4 || maisFrequente == 5) {
+			/*QUADRA*/
+			resultado = valor * 50;
+		}
 		
+		return resultado;
 	}
 
 	public int[] contarCartas() {
@@ -92,7 +110,7 @@ public class MaoDeCartas {
 	
 	private int segundaMaiorOcorrencia() {
 		int[] contador = new int[13];
-		contador = contarDados();
+		contador = contarCartas();
 		int maior = -1;
 		int posMaior = 0;
 		for(int i=0; i<13; i++) if(contador[i] > maior) {
