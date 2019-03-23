@@ -1,7 +1,7 @@
 package VideoPoker;
 
 /**
- * Essca classe representa um conjunto de cartas numa mão.
+ * Essca classe representa um conjunto de cartas numa mão que são pegadas de um baralho.
  * @author Mateus Prado(10851707) e Matheus Tomieiro(10734630)
  *
  */
@@ -59,10 +59,68 @@ public class MaoDeCartas {
 					mao[num-1] = aux[0];
 				}	
 			}
-		}	
+		}
 	}
 	
+	public int aposta(int valor) {
+		int [] contagem = contarCartas();
+		if(this.maiorOcorrencia() == 1) {
+			/*STRAIGHT, FLUSH, STRAIGHT FLUSH E ROYAL STRAIGHT FLUSH*/
+		}
+		else if(this.maiorOcorrencia() == 2 && this.segundaMaiorOcorrencia() == 2) {
+			/*Dois Pares*/
+		}
+		else if(){
+			
+		}
+		
+	}
+
+	public int[] contarCartas() {
+		int[] contador = new int[13];
+		for(int i=0; i<n; i++) contador[mao[i].getValue()]++;
+		return contador;
+	}
 	
+	private int maiorOcorrencia() {
+		int[] contador = new int[13];
+		contador = contarCartas();
+		int maior = -1;
+		for(int i=0; i<13; i++) if(contador[i] > maior) maior = contador[i];
+		return maior;
+	}
 	
+	private int segundaMaiorOcorrencia() {
+		int[] contador = new int[13];
+		contador = contarDados();
+		int maior = -1;
+		int posMaior = 0;
+		for(int i=0; i<13; i++) if(contador[i] > maior) {
+			maior = contador[i];
+			posMaior = i;
+		}
+		int segundaMaior = -1;
+		for(int i=0; i<13; i++) if(i != posMaior && contador[i] > segundaMaior) segundaMaior = contador[i];
+		return segundaMaior;
+	}
+	
+	/*
+	public boolean ocorrenciaDe(int x) {
+		for(int i=0; i<n; i++) if(x == mao[i].getValue()) return true;
+		return false;
+	}*/
+	
+	/**
+	 * Método para embaralhar, ou seja, se perde as cartas que estavam na mão do jogador voltando ao baralho(situação inicial).
+	 */
+	public void embaralhar() {
+		baralho = new Baralho();
+		mao = new Carta[n];
+	}
+	
+	@Override
+	public void toString() {
+		
+	}
 	
 }

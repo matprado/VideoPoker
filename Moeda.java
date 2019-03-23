@@ -32,6 +32,14 @@ public class Moeda {
 	}
 	
 	/**
+	 * Método para setar um valor para moeda
+	 * @param x - o novo valor
+	 */
+	public void setMoeda(int x) {
+		moeda = x;
+	}
+	
+	/**
 	 * Método para descontar n no saldo de moedas.
 	 * @param n - o número a ser descontado
 	 */
@@ -61,6 +69,15 @@ public class Moeda {
 	 */
 	public boolean saldoZero() {
 		return (moeda == 0);
+	}
+	
+	/**
+	 * Método para conferir se uma aposta é válida ou não, ou seja, se está dentro dos limites de moeda disponível.
+	 * @param aposta - valor da aposta.
+	 * @return - boolean com a resposta.
+	 */
+	public boolean apostaValida(int aposta) {
+		return (aposta >= 0 && aposta <= moeda);	
 	}
 	
 }
