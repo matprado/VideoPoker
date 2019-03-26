@@ -136,15 +136,14 @@ public class MaoDeCartas {
 		mao = new Carta[n];
 	}
 	
-	public int apostar(int aposta) {
-		return 0;
-		
-	}
-	
-	
 	@Override
 	public String toString() {
 		return " ";
+	}
+
+	public int apostar(int aposta) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }
