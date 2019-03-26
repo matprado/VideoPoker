@@ -16,7 +16,7 @@ public class Carta {
 	
 	/**
 	 * 
-	 * @return Valor da carta, de 0 a 12 (Onde 0 é Ás e 12 é Reis);
+	 * @return Valor da carta, de 2 a 14 (Onde 2 é 2 e 14 é As);
 	 */
 	public int getValue(){
 		return this.valor;
@@ -33,16 +33,18 @@ public class Carta {
 	@Override
 	public String toString() {
 		String aux = new String();
-		if(this.valor<10) {
+		if(this.valor<11 && this.valor > 1) {
 			aux += this.valor + " ";
 		}
 		else {
 			switch(this.valor) {
-				case 10: aux += "J ";
+				case 11: aux += "J ";
 					break;
-				case 11: aux += "Q ";
+				case 12: aux += "Q ";
 					break;
-				case 12: aux += "K ";
+				case 13: aux += "K ";
+					break;
+				case 14: aux += "A ";
 					break;
 			}
 		}

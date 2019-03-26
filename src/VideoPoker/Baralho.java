@@ -18,7 +18,7 @@ public class Baralho {
 		r = new Random();
 		cartasDisponiveis = 52;
 		vet = new Carta[52];
-		for(int i=0; i<14; i++) {
+		for(int i=2; i<15; i++) {
 			for(int j=0; j<4; j++)
 				vet[(i*4)+j] = new Carta(i, j); //inicializa todas as cartas possíveis
 		}

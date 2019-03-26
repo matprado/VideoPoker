@@ -3,7 +3,7 @@ package VideoPoker;
 
 public class VideoPoker {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		MaoDeCartas mao = new MaoDeCartas();
 		Moeda creditos = new Moeda();
 		String escolha = "";
