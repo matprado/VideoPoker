@@ -15,8 +15,8 @@ public class Carta {
 	}
 	
 	public Carta() {
-		this.valor = 0;
-		this.naipe = 0;
+		this.valor = 8;
+		this.naipe = 2;
 	}
 	
 	/**

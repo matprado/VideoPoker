@@ -72,7 +72,7 @@ public class MaoDeCartas {
 	public int aposta(int valor) {
 		int[] contagem = new int[13]; 
 		contagem = contarCartas();
-		int resultado = valor*1;
+		int resultado = 0;
 		int maisFrequente = this.maiorOcorrencia();
 		int segundoMaisFrequente = this.segundaMaiorOcorrencia();
 		

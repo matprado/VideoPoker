@@ -11,18 +11,20 @@ public class Baralho {
 	private int cartasDisponiveis;
 	private Random r;
 	
+	
 	/**
 	 * Construtor que inicializa todas as cartas do baralho e a seed do método Random()
 	 */
 	public Baralho() {
-		for(int i=0;i<52;i++) {
+		for(int i=0; i<52; i++) {
 			vet[i] = new Carta();
 		}
 		r = new Random();
 		cartasDisponiveis = 52;
 		for(int i=0; i<13; i++) {
-			for(int j=0; j<4; j++)
-				vet[i+j].setCarta(i,j); //inicializa todas as cartas possíveis
+			for(int j=0; j<4; j++){
+				vet[(i*4)+j].setCarta(i,j); //inicializa todas as cartas possíveis
+			}
 		}
 	}
 	
@@ -32,9 +34,16 @@ public class Baralho {
 	 * @return - a Carta removida
 	 */
 	public Carta removeCarta(int i) {
-		Carta removida = vet[i];
+		Carta removida = new Carta();
+		System.out.println("CARTA DO VETOR");
+		System.out.println((vet[40]).toString());
+		removida = this.vet[i];
+		System.out.println("CARTAS DISPONIVEIS");
+		System.out.println(this.cartasDisponiveis);
 		/*Preenche a posição removida com a última carta do baralho atualmente*/
 		vet[i] = vet[cartasDisponiveis-1];
+		System.out.println("CARTA DO FINAL");
+		System.out.println((vet[cartasDisponiveis-1]).toString());
 		/*Remove a carta*/
 		vet[cartasDisponiveis-1] = null;
 		this.cartasDisponiveis--;
@@ -52,7 +61,7 @@ public class Baralho {
 			ret[i] = new Carta();
 		}
 		for(int i=0; i<n; i++) {
-			ret[i] = removeCarta(r.getIntRand(0, cartasDisponiveis+1));
+			ret[i] = removeCarta(r.getIntRand(0, cartasDisponiveis));
 		}
 		return ret;
 	}
