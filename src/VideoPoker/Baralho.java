@@ -35,15 +35,9 @@ public class Baralho {
 	 */
 	public Carta removeCarta(int i) {
 		Carta removida = new Carta();
-		System.out.println("CARTA DO VETOR");
-		System.out.println((vet[40]).toString());
 		removida = this.vet[i];
-		System.out.println("CARTAS DISPONIVEIS");
-		System.out.println(this.cartasDisponiveis);
 		/*Preenche a posição removida com a última carta do baralho atualmente*/
 		vet[i] = vet[cartasDisponiveis-1];
-		System.out.println("CARTA DO FINAL");
-		System.out.println((vet[cartasDisponiveis-1]).toString());
 		/*Remove a carta*/
 		vet[cartasDisponiveis-1] = null;
 		this.cartasDisponiveis--;

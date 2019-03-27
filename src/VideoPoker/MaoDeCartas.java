@@ -69,15 +69,101 @@ public class MaoDeCartas {
 			}
 		}
 	}
+	/**
+	 * 
+	 * @return Retorna um booleano se sao naipes iguais ou nao
+	 */
+	private boolean naipesIguais() {
+		int p = this.n-1;
+		int[] naipes = new int[this.n];
+		boolean verify = true;
+		for(int i=0; i<this.n; i++) {
+			naipes[i] = mao[i].getNaipe();
+		}
+		for(int i=0; i<(this.n); i++) {
+			for(int j=1; j<=(p); j++) {
+				if(naipes[i] != naipes[i+j]) {
+					verify = false;
+				}
+			}
+			p--;
+		}
+		return verify;
+	}
+	/**
+	 * 
+	 * @return Retorna um booleano se sao naipes iguais ou nao
+	 */
+	private boolean cartasSeguidasMaior10() {
+		boolean verify = false;
+		int[] valores = {1,1,1,1,1};
+		int aux = 0;
+		int maior = 0, menor = 12;
+		for(int i=0; i<this.n; i++) {
+			if(mao[i].getValue() > maior) maior = mao[i].getValue();
+			if(mao[i].getValue() < menor) menor = mao[i].getValue();
+		}
+		if(menor>7 && maior<13) {
+			//VERIFICANDO SE HÀ UMA SEQUENCIA de 10 a AS
+			for(int i=0; i<this.n; i++) {
+				valores[(mao[i].getValue())-8] = 0;
+			}
+			for(int i=0; i<this.n; i++) {
+				aux += valores[i];
+			}
+			if(aux == 0) {
+				verify = true;
+			}
+		}
+		return verify;
+	}
+	
+	private boolean cartasSeguidasMenor10() {
+		boolean verify = false;
+		int[] valores = {0,0,0,0,0,0,0,0,0,0,0,0};
+		int aux = 0;
+		int maior = 0, menor = 12;
+		for(int i=0; i<this.n; i++) {
+			if(mao[i].getValue() > maior) maior = mao[i].getValue();
+			if(mao[i].getValue() < menor) menor = mao[i].getValue();
+		}
+		if(maior<12 && menor>1){
+			for(int i=0; i<this.n; i++) {
+				valores[(mao[i].getValue())-8] = 1;
+			}
+			for(int i=0; i<12; i++) {
+				if(valores[i] == 1 && valores[i+1] == 1 && valores[i+2] == 1 && valores[i+3] == 1 && valores[i+4] == 1 && i<8) {
+					verify = true;
+				}
+			}
+		}
+		return verify;
+	}
+	
 	public int aposta(int valor) {
-		int[] contagem = new int[13]; 
+		int[] contagem = new int[13];
 		contagem = contarCartas();
 		int resultado = 0;
 		int maisFrequente = this.maiorOcorrencia();
 		int segundoMaisFrequente = this.segundaMaiorOcorrencia();
 		
 		if(maisFrequente == 1) {
-			/*STRAIGHT, FLUSH, STRAIGHT FLUSH E ROYAL STRAIGHT FLUSH*/
+			//FLUSH
+			if(naipesIguais() && !cartasSeguidasMenor10()){
+				resultado = valor*10;
+			}
+			//STRAIGHT
+			else if(!naipesIguais() && cartasSeguidasMenor10()){
+				resultado = valor*5;
+			}
+			//STRAIGHT FLUSH
+			else if(naipesIguais() && cartasSeguidasMenor10()){
+				resultado = valor*100;
+			}
+			//ROYAL STRAIGHT FLUSH
+			else if(naipesIguais() && cartasSeguidasMaior10()){
+				resultado = valor*200;
+			}
 		}
 		if(maisFrequente == 2 && segundoMaisFrequente == 2) {
 			/*Dois Pares*/
