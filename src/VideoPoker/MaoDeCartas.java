@@ -36,22 +36,26 @@ public class MaoDeCartas {
 		}
 	}
 	/**
-	 * Método para pegar n cartas do baralho
+	 * Método para pegar n cartas do baralho;
 	 */
 	public void pegaCartas() {
 		mao = baralho.getCartas(n);
 	}
 	
 	/**
-	 * Método para pegar cartas do baralho indicadas pela string(com números entre espaços)
-	 * @param quais - string com as cartas a serem modificadas
+	 * Método para pegar cartas do baralho indicadas pela string(com números entre espaços);
+	 * @param quais - string com as cartas a serem modificadas;
 	 */
 	public void pegaCartas(String quais) {
+		// vetor para receber uma carta do baralho
 		Carta[] aux = new Carta[1];
+		
 		for(int i=0; i<1; i++) {
 			aux[i] = new Carta();
 		}
+		
 		int num = 0;
+		
 		/*Percorre string*/
 		for(int i=0; i<quais.length(); i++) {
 			//pega o char atual na string
@@ -68,81 +72,100 @@ public class MaoDeCartas {
 				}	
 			}
 		}
+		
 	}
 	/**
-	 * 
-	 * @return Retorna um booleano se sao naipes iguais ou nao
+	 * Método para retornar um booleano informando se os naipes das cartas na mão são iguais;
+	 * @return Retorna um booleano se sao naipes iguais ou nao;
 	 */
 	private boolean naipesIguais() {
-		int p = this.n-1;
+		
 		int[] naipes = new int[this.n];
-		boolean verify = true;
-		for(int i=0; i<this.n; i++) {
+		
+		boolean iguais = true;
+		
+		for(int i=0; i < this.n; i++) {
 			naipes[i] = mao[i].getNaipe();
 		}
+		
+		int aux = this.n-1; // p é o número de cartas na mão - 1
+		
 		for(int i=0; i<(this.n); i++) {
-			for(int j=1; j<=(p); j++) {
+			for(int j=1; j<=(aux); j++) {
 				if(naipes[i] != naipes[i+j]) {
-					verify = false;
+					iguais = false;
 				}
 			}
-			p--;
+			aux--;
 		}
-		return verify;
+		
+		return iguais;
 	}
+	
 	/**
-	 * 
-	 * @return Retorna um booleano se sao naipes iguais ou nao
-	 */
+	 * Método para conferir se há uma sequência de 10 até AS na mão;
+	 * @return Retorna um booleano informando se há uma sequência de 10 até AS
+	 * */
 	private boolean cartasSeguidasMaior10() {
-		boolean verify = false;
-		int[] valores = {1,1,1,1,1};
+		boolean temSequencia = false;
+		int[] valores = {1,1,1,1,1}; //vetor para usar na verificação
 		int aux = 0;
 		int maior = 0, menor = 12;
+		//pega o menor e o maior valor:
 		for(int i=0; i<this.n; i++) {
-			if(mao[i].getValue() > maior) maior = mao[i].getValue();
-			if(mao[i].getValue() < menor) menor = mao[i].getValue();
+			if(mao[i].getValor() > maior) maior = mao[i].getValor();
+			if(mao[i].getValor() < menor) menor = mao[i].getValor();
 		}
 		if(menor>7 && maior<13) {
 			//VERIFICANDO SE HÀ UMA SEQUENCIA de 10 a AS
 			for(int i=0; i<this.n; i++) {
-				valores[(mao[i].getValue())-8] = 0;
+				valores[(mao[i].getValor())-8] = 0;
 			}
 			for(int i=0; i<this.n; i++) {
 				aux += valores[i];
 			}
 			if(aux == 0) {
-				verify = true;
+				temSequencia = true;
 			}
 		}
-		return verify;
+		return temSequencia;
 	}
 	
+	/**
+	 * Método para conferir se há uma sequência de 2 até 11 na mão;
+	 * @return Retorna um booleano informando se há uma sequência de 10 até AS
+	 * */
 	private boolean cartasSeguidasMenor10() {
-		boolean verify = false;
-		int[] valores = {0,0,0,0,0,0,0,0,0,0,0,0};
-		int aux = 0;
+		
+		boolean temSequencia = false;
+		int[] valores = {0,0,0,0,0,0,0,0,0,0,0,0}; //vetor para usar na verificação
 		int maior = 0, menor = 12;
+		
 		for(int i=0; i<this.n; i++) {
-			if(mao[i].getValue() > maior) maior = mao[i].getValue();
-			if(mao[i].getValue() < menor) menor = mao[i].getValue();
+			if(mao[i].getValor() > maior) maior = mao[i].getValor();
+			if(mao[i].getValor() < menor) menor = mao[i].getValor();
 		}
+		
 		if(maior<12 && menor>1){
 			for(int i=0; i<this.n; i++) {
-				valores[(mao[i].getValue())-8] = 1;
+				valores[(mao[i].getValor())-2] = 1;
 			}
 			for(int i=0; i<12; i++) {
-				if(valores[i] == 1 && valores[i+1] == 1 && valores[i+2] == 1 && valores[i+3] == 1 && valores[i+4] == 1 && i<8) {
-					verify = true;
+				if(i<8 && valores[i] == 1 && valores[i+1] == 1 && valores[i+2] == 1 && valores[i+3] == 1 && valores[i+4] == 1) {
+					temSequencia = true;
 				}
 			}
 		}
-		return verify;
+		return temSequencia;
 	}
 	
+	/**
+	 * Método para realizar apostas e verificar em quais casos a aposta se encaixa.
+	 * @param Valor da aposta
+	 * @return Um inteiro que representa o valor lucro da aposta.
+	 */
 	public int aposta(int valor) {
-		int[] contagem = new int[13];
-		contagem = contarCartas();
+	
 		int resultado = 0;
 		int maisFrequente = this.maiorOcorrencia();
 		int segundoMaisFrequente = this.segundaMaiorOcorrencia();
@@ -186,15 +209,23 @@ public class MaoDeCartas {
 		
 		return resultado;
 	}
-
-	public int[] contarCartas() {
+	
+	/**
+	 * Metodo para contar cartas
+	 * @return Retorna um vetor de inteiro
+	 */
+	private int[] contarCartas() {
 		int[] contador = new int[13];
 		for(int i=0; i<n; i++) {
-			contador[mao[i].getValue()]++;
+			contador[mao[i].getValor()]++;
 		}
 		return contador;
 	}
 	
+	/**
+	 * Metodo para verificar a maior ocorrencia de alguma carta
+	 * @return Um inteiro que simboliza a maior ocorrencia
+	 */
 	private int maiorOcorrencia() {
 		int[] contador = new int[13];
 		contador = contarCartas();
@@ -207,6 +238,10 @@ public class MaoDeCartas {
 		return maior;
 	}
 	
+	/**
+	 * Metodo para verificar a segunda maior ocorrencia de alguma carta
+	 * @return Um inteiro que simboliza a segunda maior ocorrencia
+	 */
 	private int segundaMaiorOcorrencia() {
 		int[] contador = new int[13];
 		contador = contarCartas();
@@ -221,11 +256,18 @@ public class MaoDeCartas {
 		return segundaMaior;
 	}
 	
+	/**
+	 **Metodo embaralhar. Basicamente refaz o baralho
+	 */
 	public void embaralhar() {
 		baralho = new Baralho();
 		//MAO PEGA AS CARTAS NA MAIN
 	}
+	
 	@Override
+	/**
+	 * Metodo para tranformar a mao de cartas em Strings
+	 */
 	public String toString() {
 		String[] vetstr = new String[this.n];
 		for(int i=0; i<this.n; i++) {

@@ -8,6 +8,7 @@ public class VideoPoker {
 		Moeda creditos = new Moeda();
 		String escolha = "";
 		int aposta = 0;
+		boolean naoJogou = true;
 		boolean querJogar = true;
 		
 		System.out.print("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n");
@@ -33,6 +34,7 @@ public class VideoPoker {
 			
 			if(querJogar) {
 				
+				naoJogou = false;
 				creditos.perdeMoeda(aposta);
 	
 				mao.pegaCartas();
@@ -51,8 +53,10 @@ public class VideoPoker {
 			
 		}while(querJogar && !creditos.saldoNegativo());
 		
-		System.out.print("\n\n" + creditos.toString() + "\n");
-		System.out.print(mao.toString() + "\n");
+		if(!naoJogou) {
+			System.out.print("\n\n" + creditos.toString() + "\n");
+			System.out.print(mao.toString() + "\n");
+		}
 		
 		if(!querJogar) {
 			System.out.print("Lembre-se: o que se faz em Vegas, fica em Vegas!\n\nFIM DE JOGO!\n");
