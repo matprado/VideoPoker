@@ -7,7 +7,7 @@ package VideoPoker;
  */
 public class MaoDeCartas {
 
-	private Carta[] mao;
+	private Carta[] mao = new Carta[5];
 	private int n;
 	private Baralho baralho;
 	
@@ -15,9 +15,9 @@ public class MaoDeCartas {
 	 * Contrutor padrão que inicializa as cartas e o baralho.
 	 */
 	public MaoDeCartas() {
-		n = 5;
+		this.n = 5;
 		baralho = new Baralho();
-		mao = new Carta[5];
+		//mao = new Carta[5];
 	}
 	
 	/**
@@ -29,7 +29,6 @@ public class MaoDeCartas {
 		baralho = new Baralho();
 		mao = new Carta[n];
 	}
-	
 	/**
 	 * Método para pegar n cartas do baralho
 	 */
@@ -63,14 +62,14 @@ public class MaoDeCartas {
 	}
 	
 	public int aposta(int valor) {
-		int [] contagem = contarCartas();
+		int[] contagem = new int[13]; 
+		contagem = contarCartas();
 		int resultado = 0;
 		int maisFrequente = this.maiorOcorrencia();
 		int segundoMaisFrequente = this.segundaMaiorOcorrencia();
 		
 		if(maisFrequente == 1) {
 			/*STRAIGHT, FLUSH, STRAIGHT FLUSH E ROYAL STRAIGHT FLUSH*/
-			
 		}
 		if(maisFrequente == 2 && segundoMaisFrequente == 2) {
 			/*Dois Pares*/
@@ -96,7 +95,9 @@ public class MaoDeCartas {
 
 	public int[] contarCartas() {
 		int[] contador = new int[13];
-		for(int i=0; i<n; i++) contador[mao[i].getValue()]++;
+		for(int i=0; i<n; i++) {
+			contador[mao[i].getValue()]++;
+		}
 		return contador;
 	}
 	
@@ -104,7 +105,11 @@ public class MaoDeCartas {
 		int[] contador = new int[13];
 		contador = contarCartas();
 		int maior = -1;
-		for(int i=0; i<13; i++) if(contador[i] > maior) maior = contador[i];
+		for(int i=0; i<13; i++) {
+			if(contador[i] > maior) { 
+				maior = contador[i];
+			}
+		}
 		return maior;
 	}
 	
@@ -135,15 +140,32 @@ public class MaoDeCartas {
 		baralho = new Baralho();
 		mao = new Carta[n];
 	}
-	
+	/*
 	@Override
 	public String toString() {
-		return " ";
+		String[] vetstr = new String[this.n];
+		for(int i=0; i<this.n; i++) {
+			vetstr[i] = mao[i].toString();
+		}
+		String aux = new String();
+		for(int i=0; i<this.n; i++) {
+			aux += (i+1) + "\t\t";
+		}
+		aux += "\n";
+		for(int i=0; i<5; i++) {
+			for(int j=0; j<this.n; j++) {
+				for(int k=0; k<vetstr[j].length(); k++) {
+					if(vetstr[j].charAt(k) == '\n') {
+						vetstr[j] = vetstr[j].substring(k+1,vetstr[j].length());
+						break;
+					}
+					aux += vetstr[j].charAt(k);
+				}
+				aux += "\t\t";
+			}
+			aux += "\n";
+		}
+		return aux;
 	}
-
-	public int apostar(int aposta) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
+	*/
 }

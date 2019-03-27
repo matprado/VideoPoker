@@ -14,9 +14,14 @@ public class Carta {
 		this.naipe = naipe;
 	}
 	
+	public Carta() {
+		this.valor = 0;
+		this.naipe = 0;
+	}
+	
 	/**
 	 * 
-	 * @return Valor da carta, de 2 a 14 (Onde 2 é 2 e 14 é As);
+	 * @return Valor da carta, de 0 a 12 (Onde 0 é 2 e 12 é As);
 	 */
 	public int getValue(){
 		return this.valor;
@@ -33,18 +38,19 @@ public class Carta {
 	@Override
 	public String toString() {
 		String aux = new String();
-		if(this.valor<11 && this.valor > 1) {
+		aux += " - - -\n|     |\n| ";
+		if(this.valor<9 && this.valor > -1) {
 			aux += this.valor + " ";
 		}
 		else {
 			switch(this.valor) {
-				case 11: aux += "J ";
+				case 9: aux +=  "J ";
 					break;
-				case 12: aux += "Q ";
+				case 10: aux += "Q ";
 					break;
-				case 13: aux += "K ";
+				case 11: aux += "K ";
 					break;
-				case 14: aux += "A ";
+				case 12: aux += "A ";
 					break;
 			}
 		}
@@ -58,6 +64,7 @@ public class Carta {
 			case 3: aux += "♦";
 				break;
 		}
+		aux += "  |\n|     |\n - - -\n";
 		return aux;
 	
 	}

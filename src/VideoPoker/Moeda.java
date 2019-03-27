@@ -80,4 +80,14 @@ public class Moeda {
 		return (aposta >= 0 && aposta <= moeda);	
 	}
 	
+	@Override
+	public String toString() {
+		String aux = new String();
+		aux += "$$$$     MONEY     $$$$\n";
+		aux += "\t " + this.moeda;
+		aux += "\n";
+		aux += "$$$$\t\t   $$$$\n";
+		return aux;
+	}
+	
 }

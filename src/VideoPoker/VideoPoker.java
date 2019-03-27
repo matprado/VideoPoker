@@ -45,9 +45,7 @@ public class VideoPoker {
 				System.out.print("Escolha quais cartas deseja trocar(digite entre espaços):\n");
 				escolha = EntradaTeclado.leString();
 				mao.pegaCartas(escolha);
-				
-				creditos.ganhaMoeda(mao.apostar(aposta));
-				
+				creditos.ganhaMoeda(mao.aposta(aposta));
 				mao.embaralhar();
 			}
 			

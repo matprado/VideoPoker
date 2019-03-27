@@ -7,7 +7,7 @@ package VideoPoker;
  */
 public class Baralho {
 	
-	private Carta[] vet;
+	private Carta[] vet = new Carta[52];
 	private int cartasDisponiveis;
 	private Random r;
 	
@@ -17,10 +17,9 @@ public class Baralho {
 	public Baralho() {
 		r = new Random();
 		cartasDisponiveis = 52;
-		vet = new Carta[52];
-		for(int i=2; i<15; i++) {
+		for(int i=0; i<13; i++) {
 			for(int j=0; j<4; j++)
-				vet[(i*4)+j] = new Carta(i, j); //inicializa todas as cartas possíveis
+				vet[i+j] = new Carta(i, j); //inicializa todas as cartas possíveis
 		}
 	}
 	
@@ -32,9 +31,10 @@ public class Baralho {
 	public Carta removeCarta(int i) {
 		Carta removida = vet[i];
 		/*Preenche a posição removida com a última carta do baralho atualmente*/
-		vet[i] = vet[cartasDisponiveis];
+		vet[i] = vet[cartasDisponiveis-1];
 		/*Remove a carta*/
-		vet[cartasDisponiveis--] = null;
+		vet[cartasDisponiveis-1] = null;
+		this.cartasDisponiveis--;
 		return removida;
 	}
 	
@@ -45,6 +45,9 @@ public class Baralho {
 	 */
 	public Carta[] getCartas(int n) {
 		Carta[] ret = new Carta[n];
+		for(int i=0; i<n; i++) {
+			ret[i] = new Carta();
+		}
 		for(int i=0; i<n; i++) {
 			ret[i] = this.removeCarta(r.getIntRand(0, cartasDisponiveis+1));
 		}
