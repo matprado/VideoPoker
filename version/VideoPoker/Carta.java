@@ -15,8 +15,8 @@ public class Carta {
 	}
 	
 	public Carta() {
-		this.valor = 8;
-		this.naipe = 2;
+		this.valor = 0;
+		this.naipe = 0;
 	}
 	
 	/**
@@ -35,22 +35,15 @@ public class Carta {
 		return this.naipe;
 	}
 	
-	public void setCarta(int valor, int naipe) {
-		this.valor = valor;
-		this.naipe = naipe;
-	}
-	
 	@Override
 	public String toString() {
 		String aux = new String();
 		aux += " - - -\n|     |\n| ";
-		if(this.valor<8 && this.valor > -1) {
-			aux += this.valor+2 + " ";
+		if(this.valor<9 && this.valor > -1) {
+			aux += this.valor + " ";
 		}
 		else {
 			switch(this.valor) {
-				case 8: aux +=  "D ";
-					break;
 				case 9: aux +=  "J ";
 					break;
 				case 10: aux += "Q ";
@@ -71,7 +64,7 @@ public class Carta {
 			case 3: aux += "♦";
 				break;
 		}
-		aux += " |\n|     |\n - - -\n";
+		aux += "  |\n|     |\n - - -\n";
 		return aux;
 	
 	}
