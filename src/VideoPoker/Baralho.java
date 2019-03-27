@@ -15,11 +15,14 @@ public class Baralho {
 	 * Construtor que inicializa todas as cartas do baralho e a seed do método Random()
 	 */
 	public Baralho() {
+		for(int i=0;i<52;i++) {
+			vet[i] = new Carta();
+		}
 		r = new Random();
 		cartasDisponiveis = 52;
 		for(int i=0; i<13; i++) {
 			for(int j=0; j<4; j++)
-				vet[i+j] = new Carta(i, j); //inicializa todas as cartas possíveis
+				vet[i+j].setCarta(i,j); //inicializa todas as cartas possíveis
 		}
 	}
 	
@@ -49,7 +52,7 @@ public class Baralho {
 			ret[i] = new Carta();
 		}
 		for(int i=0; i<n; i++) {
-			ret[i] = this.removeCarta(r.getIntRand(0, cartasDisponiveis+1));
+			ret[i] = removeCarta(r.getIntRand(0, cartasDisponiveis+1));
 		}
 		return ret;
 	}

@@ -31,6 +31,9 @@ public class MaoDeCartas {
 		this.n = n;
 		baralho = new Baralho();
 		mao = new Carta[n];
+		for(int i=0; i<n; i++) {
+			mao[i] = new Carta();
+		}
 	}
 	/**
 	 * Método para pegar n cartas do baralho
@@ -45,6 +48,9 @@ public class MaoDeCartas {
 	 */
 	public void pegaCartas(String quais) {
 		Carta[] aux = new Carta[1];
+		for(int i=0; i<1; i++) {
+			aux[i] = new Carta();
+		}
 		int num = 0;
 		/*Percorre string*/
 		for(int i=0; i<quais.length(); i++) {
@@ -63,7 +69,6 @@ public class MaoDeCartas {
 			}
 		}
 	}
-	
 	public int aposta(int valor) {
 		int[] contagem = new int[13]; 
 		contagem = contarCartas();
@@ -130,20 +135,10 @@ public class MaoDeCartas {
 		return segundaMaior;
 	}
 	
-	/*
-	public boolean ocorrenciaDe(int x) {
-		for(int i=0; i<n; i++) if(x == mao[i].getValue()) return true;
-		return false;
-	}*/
-	
-	/**
-	 * Método para embaralhar, ou seja, se perde as cartas que estavam na mão do jogador voltando ao baralho(situação inicial).
-	 */
 	public void embaralhar() {
 		baralho = new Baralho();
-		mao = new Carta[n];
+		//MAO PEGA AS CARTAS NA MAIN
 	}
-	/*
 	@Override
 	public String toString() {
 		String[] vetstr = new String[this.n];
@@ -170,5 +165,4 @@ public class MaoDeCartas {
 		}
 		return aux;
 	}
-	*/
 }
