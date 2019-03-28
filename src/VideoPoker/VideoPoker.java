@@ -7,17 +7,18 @@ public class VideoPoker {
 		MaoDeCartas mao = new MaoDeCartas();
 		Moeda creditos = new Moeda();
 		String escolha = "";
-		int aposta = 0;
+		int aposta	 = 0;
 		boolean naoJogou = true;
 		boolean querJogar = true;
 		boolean erroLeitura = false;
 		
+		/*Imprime menu inicial:*/
 		System.out.print("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n");
 		System.out.print("-    V I D E O   P O K E R    -\n");
 		System.out.print("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n\n");
 		System.out.print("Aperte Enter para começar...");
 	
-		
+		/*Lê Enter*/
 		try{
 			EntradaTeclado.leString();
 		}catch(Exception e) {
@@ -28,7 +29,8 @@ public class VideoPoker {
 			System.out.print("\n\n" + creditos.toString() + "\n");
 			
 			System.out.print("Digite a quantidade de moedas que você vai apostar:\n(apostar 0 moedas termina o jogo!)\n");
-
+			
+			//Lê a aposta
 			do{
 				erroLeitura = false;
 				try{
@@ -39,6 +41,7 @@ public class VideoPoker {
 				}
 			}while(erroLeitura);
 			
+			//Confere se a aposta é inválida
 			while(!creditos.apostaValida(aposta)) {
 				System.out.print("Erro -> aposta inválida!\nPor favor, digite novamente.\n");
 				System.out.print("Digite a quantidade de moedas que você vai apostar:\n(apostar 0 moedas termina o jogo!)\n");
@@ -57,6 +60,7 @@ public class VideoPoker {
 			
 			if(querJogar) {
 				
+				/*jogou pelo menos uma vez*/
 				naoJogou = false;
 				creditos.perdeMoeda(aposta);
 	
@@ -75,6 +79,7 @@ public class VideoPoker {
 					}
 				}while(erroLeitura);
 				
+				//Pega as cartas do baralho
 				mao.pegaCartas(escolha);
 				
 				System.out.print("\n" + mao.toString() + "\n");
@@ -89,12 +94,15 @@ public class VideoPoker {
 					}
 				}while(erroLeitura);
 				
+				//Pega as cartas escolhidas do baralho
 				mao.pegaCartas(escolha);
 				
+				//Faz a aposta
 				creditos.ganhaMoeda(mao.aposta(aposta));
 				
 				System.out.print(mao.toString() + "\n");
 				
+				//embaralha as cartas da mão no baralho
 				mao.embaralhar();
 			}
 			
@@ -103,7 +111,6 @@ public class VideoPoker {
 		
 		if(!naoJogou) {
 			System.out.print("\n\n" + creditos.toString() + "\n");
-			
 		}
 		
 		if(!querJogar) {
@@ -113,4 +120,5 @@ public class VideoPoker {
 		}
 		
 	}
+	
 }
