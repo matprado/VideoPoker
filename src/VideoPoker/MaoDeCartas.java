@@ -278,7 +278,7 @@ public class MaoDeCartas {
 			aux += (i+1) + "\t\t";
 		}
 		aux += "\n";
-		for(int i=0; i<5; i++) {
+		for(int i=0; i<7; i++) {
 			for(int j=0; j<this.n; j++) {
 				for(int k=0; k<vetstr[j].length(); k++) {
 					if(vetstr[j].charAt(k) == '\n') {

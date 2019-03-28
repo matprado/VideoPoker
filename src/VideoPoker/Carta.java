@@ -55,7 +55,7 @@ public class Carta {
 	@Override
 	public String toString() {
 		String aux = new String();
-		aux += " - - -\n|     |\n| ";
+		aux += "+-----+\n|     |\n|     |\n| ";
 		if(this.valor < 8 && this.valor > -1) {
 			aux += this.valor+2 + " ";
 		}
@@ -83,7 +83,7 @@ public class Carta {
 			case 3: aux += "♦";
 				break;
 		}
-		aux += " |\n|     |\n - - -\n";
+		aux += " |\n|     |\n|     |\n+-----+\n";
 		return aux;
 	
 	}
