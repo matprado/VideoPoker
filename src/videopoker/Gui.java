@@ -1,4 +1,4 @@
-package gui;
+package videopoker;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,45 +8,52 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
-import cards.MaoDeCartas;
+import cartas.MaoDeCartas;
 import util.EntradaTeclado;
-import videopoker.Moeda;
+import moedas.Moeda;
 
-public class VideoPoker {
+@SuppressWarnings("serial")
+public class Gui extends JFrame{
 	
-	private static void desenhaMenu(JFrame f) {
-		/*BEGINNING OF MENU INICIAL*/		
+	public Gui(String nome){
+		super(nome);
+		this.setSize(800, 600);
+		this.setLocation(300,100);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
+	}
+	
+	private void desenhaMenu() {
+		/*BEGINNING OF MENU INICIAL*/	
 		
-		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		f.setVisible(true);
-		f.setSize(800, 600);
-		f.setLocation(300,100);
-		JLabel label = new JLabel(new ImageIcon("/Users/matheus/git/VideoPoker/img/iniciar/logo.png"),
+	
+		JLabel label = new JLabel(new ImageIcon("/home/mateusp_8877/Desktop/POO/exercicios/VideoPoker/png/LOGO.png"),
 								  JLabel.CENTER);
-		f.add(BorderLayout.CENTER,label);
-		f.setSize(800, 600);
-		f.setLocation(300,100);
+		this.add(BorderLayout.CENTER,label);
+		this.setSize(800, 600);
+		this.setLocation(300,100);
 		JButton iniciar = new JButton();
 		iniciar.add(BorderLayout.CENTER, 
-					new JLabel(new ImageIcon("/Users/matheus/git/VideoPoker/img/iniciar/botaoIniciar.png"),
+					new JLabel(new ImageIcon("/home/mateusp_8877/Desktop/POO/exercicios/VideoPoker/png/botaoIniciar.png"),
 					JLabel.CENTER));
-		f.add(BorderLayout.SOUTH, iniciar);
+		this.add(BorderLayout.SOUTH, iniciar);
+		Gui aux = this;
+		/*END OF MENU INICIAL*/
 		ActionListener clickIniciar = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				f.getContentPane().removeAll();
-		        f.revalidate();
-		        f.repaint();
+				aux.getContentPane().removeAll();
+		        aux.revalidate();
+		        aux.repaint();
+		        aux.comecaJogo();
 		    }
 		};
 		iniciar.addActionListener(clickIniciar);
-		
-		/*END OF MENU INICIAL*/
 	}
 	
-	public static void main(String[] args) {
-		JFrame corpus = new JFrame("VIDEO POKER");
+	
+	private void comecaJogo() {
+		
 		MaoDeCartas mao = new MaoDeCartas();
 		Moeda creditos = new Moeda();
 		String escolha = "";
@@ -54,23 +61,16 @@ public class VideoPoker {
 		boolean naoJogou = true;
 		boolean querJogar = true;
 		boolean erroLeitura = false;
-		desenhaMenu(corpus);
+		
+		
+		
 		
 		do{	
 			System.out.print("\n\n" + creditos.toString() + "\n");
 			
 			System.out.print("Digite a quantidade de moedas que você vai apostar:\n(apostar 0 moedas termina o jogo!)\n");
 			
-			//Lê a aposta
-			do{
-				erroLeitura = false;
-				try{
-					aposta = EntradaTeclado.leInt();
-				}catch(Exception e) {
-					System.out.println("ENTRADA INVÁLIDA -> DIGITE NOVAMENTE!");
-					erroLeitura = true;
-				}
-			}while(erroLeitura);
+			
 			
 			//Confere se a aposta é inválida
 			while(!creditos.apostaValida(aposta)) {
@@ -150,6 +150,13 @@ public class VideoPoker {
 			System.out.print("Você está com o nome sujo na praça!\n\nFIM DE JOGO\n");
 		}
 		
+	}
+	
+	public static void main(String[] args) {
+
+		Gui corpus = new Gui("VIDEO POKER");
+		corpus.desenhaMenu();
+	
 	}
 	
 }
