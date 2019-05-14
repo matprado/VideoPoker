@@ -1,13 +1,52 @@
-package videopoker;
+package gui;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.WindowConstants;
 
-import cartas.MaoDeCartas;
-import exception.ETException;
-import moedas.Moeda;
+import cards.MaoDeCartas;
 import util.EntradaTeclado;
+import videopoker.Moeda;
 
 public class VideoPoker {
-	public static void main(String[] args) {
+	
+	private static void desenhaMenu(JFrame f) {
+		/*BEGINNING OF MENU INICIAL*/		
 		
+		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		f.setVisible(true);
+		f.setSize(800, 600);
+		f.setLocation(300,100);
+		JLabel label = new JLabel(new ImageIcon("/Users/matheus/git/VideoPoker/img/iniciar/logo.png"),
+								  JLabel.CENTER);
+		f.add(BorderLayout.CENTER,label);
+		f.setSize(800, 600);
+		f.setLocation(300,100);
+		JButton iniciar = new JButton();
+		iniciar.add(BorderLayout.CENTER, 
+					new JLabel(new ImageIcon("/Users/matheus/git/VideoPoker/img/iniciar/botaoIniciar.png"),
+					JLabel.CENTER));
+		f.add(BorderLayout.SOUTH, iniciar);
+		ActionListener clickIniciar = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				f.getContentPane().removeAll();
+		        f.revalidate();
+		        f.repaint();
+		    }
+		};
+		iniciar.addActionListener(clickIniciar);
+		
+		/*END OF MENU INICIAL*/
+	}
+	
+	public static void main(String[] args) {
+		JFrame corpus = new JFrame("VIDEO POKER");
 		MaoDeCartas mao = new MaoDeCartas();
 		Moeda creditos = new Moeda();
 		String escolha = "";
@@ -15,19 +54,7 @@ public class VideoPoker {
 		boolean naoJogou = true;
 		boolean querJogar = true;
 		boolean erroLeitura = false;
-		
-		/*Imprime menu inicial:*/
-		System.out.print("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n");
-		System.out.print("-    V I D E O   P O K E R    -\n");
-		System.out.print("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n\n");
-		System.out.print("Aperte Enter para começar...");
-	
-		/*Lê Enter*/
-		try{
-			EntradaTeclado.leString();
-		}catch(ETException e) {
-			System.out.println(e.getMessage());
-		}
+		desenhaMenu(corpus);
 		
 		do{	
 			System.out.print("\n\n" + creditos.toString() + "\n");
@@ -39,9 +66,8 @@ public class VideoPoker {
 				erroLeitura = false;
 				try{
 					aposta = EntradaTeclado.leInt();
-				}catch(ETException e) {
-					System.out.println(e.getMessage());
-					System.out.println("Por favor, digite novamente!");
+				}catch(Exception e) {
+					System.out.println("ENTRADA INVÁLIDA -> DIGITE NOVAMENTE!");
 					erroLeitura = true;
 				}
 			}while(erroLeitura);
@@ -54,9 +80,8 @@ public class VideoPoker {
 					erroLeitura = false;
 					try{
 						aposta = EntradaTeclado.leInt();
-					}catch(ETException e) {
-						System.out.println(e.getMessage());
-						System.out.println("Por favor, digite novamente!");
+					}catch(Exception e) {
+						System.out.println("ENTRADA INVÁLIDA -> DIGITE NOVAMENTE!");
 						erroLeitura = true;
 					}
 				}while(erroLeitura);
@@ -79,9 +104,8 @@ public class VideoPoker {
 					erroLeitura = false;
 					try{
 						escolha = EntradaTeclado.leString();
-					}catch(ETException e) {
-						System.out.println(e.getMessage());
-						System.out.println("Por favor, digite novamente!");
+					}catch(Exception e) {
+						System.out.println("ENTRADA INVÁLIDA -> DIGITE NOVAMENTE!");
 						erroLeitura = true;
 					}
 				}while(erroLeitura);
@@ -95,9 +119,8 @@ public class VideoPoker {
 					erroLeitura = false;
 					try{
 						escolha = EntradaTeclado.leString();
-					}catch(ETException e) {
-						System.out.println(e.getMessage());
-						System.out.println("Por favor, digite novamente!");
+					}catch(Exception e) {
+						System.out.println("ENTRADA INVÁLIDA -> DIGITE NOVAMENTE!");
 						erroLeitura = true;
 					}
 				}while(erroLeitura);
