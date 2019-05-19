@@ -75,6 +75,10 @@ public class Gui extends JFrame{
 		trocas = x;
 	}
 	
+	public void resetaCreditos() {
+		creditos = new Moeda();
+	}
+	
 	public static void main(String[] args) {
 
 		Gui corpus = new Gui("VIDEO POKER");
@@ -99,6 +103,7 @@ public class Gui extends JFrame{
 		ActionListener clickIniciar = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				resetaCreditos();
 				aux.mudarTelaAposta();
 		    }
 		};
@@ -313,7 +318,7 @@ public class Gui extends JFrame{
         
         JButton trocar = new JButton();
         if(trocar.getText().equals("")) trocar.setText("Trocar");
-        if(getTrocas() == 1) {
+        if(getTrocas() == 0) {
 			trocar.setText("Finalizar");
 		}
         Gui aux = this;
