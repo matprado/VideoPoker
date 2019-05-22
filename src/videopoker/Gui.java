@@ -1,7 +1,6 @@
 package videopoker;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -15,12 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 import cartas.Carta;
 import cartas.MaoDeCartas;
-import util.EntradaTeclado;
 import moedas.Moeda;
 
 @SuppressWarnings("serial")
@@ -190,7 +186,8 @@ public class Gui extends JFrame{
 					}
 				}
 				else if("sair".equals(e.getActionCommand())) {
-					desenhaMenu();
+					//desenhaMenu();
+					System.exit(0);;
 				}
 		    }
 		};
@@ -330,12 +327,13 @@ public class Gui extends JFrame{
 					creditos.ganhaMoeda(resultado);
 					if(creditos.getMoeda() <= 0) {
 						JOptionPane.showMessageDialog(aux, "Sem fichas para continuar. Faliu!");
-						desenhaMenu();
+						//desenhaMenu();
+						System.exit(0);
 					}else {
 						if((resultado-getAposta()) > 0)
-							JOptionPane.showMessageDialog(aux, "Ganhou "+(resultado-getAposta())+" créditos!");
+							JOptionPane.showMessageDialog(aux, "Ganhou "+(resultado)+" créditos!");
 						else if((resultado-getAposta()) < 0)
-							JOptionPane.showMessageDialog(aux, "Perdeu "+(-(resultado-getAposta()))+" créditos!");
+							JOptionPane.showMessageDialog(aux, "Perdeu "+((getAposta()))+" créditos!");
 						else
 							JOptionPane.showMessageDialog(aux, "Créditos mantidos!");
 						mao.embaralhar();
