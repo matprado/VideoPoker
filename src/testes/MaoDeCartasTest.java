@@ -1,8 +1,11 @@
-package cartas;
+package testes;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import cartas.Carta;
+import cartas.MaoDeCartas;
 
 class MaoDeCartasTest {
 

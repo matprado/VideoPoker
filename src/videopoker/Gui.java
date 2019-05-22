@@ -1,3 +1,9 @@
+/**
+ * Atividade GUI Video Poker.
+ * Alunos: Mateus Prado Santos - 10851707
+ * 		   Matheus Tomieiro - 10734630
+ */
+
 package videopoker;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,6 +26,9 @@ import cartas.MaoDeCartas;
 import moedas.Moeda;
 
 @SuppressWarnings("serial")
+/*
+ * Essa classe representa a interface gráfica do jogo;
+ * */
 public class Gui extends JFrame{
 	
 	MaoDeCartas mao;
@@ -28,6 +37,10 @@ public class Gui extends JFrame{
 	private int apostando;
 	private int trocas;
 	
+	/**
+	 * Construtor do GUI
+	 * @param nome - nome da JFrame;
+	 */
 	public Gui(String nome){
 		super(nome);
 		mao = new MaoDeCartas();
@@ -39,51 +52,93 @@ public class Gui extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
+	/**
+	 * Método que concatena na string de escolha uma nova escolha feita pelo jogador
+	 * @param s - contém mais uma escolha
+	 */
 	public void escolheu(String s) {
 		escolha += s;
 	}
 	
+	/**
+	 * Método para retornar a string com a(s) escolha(s) do jogador;
+	 * @return - a(s) escolha(s) do jogador
+	 */
 	public String getEscolha() {
 		return escolha;
 	}
 	
+	/**
+	 * Método para resetar a string de escolha;
+	 */
 	public void resetaEscolha() {
 		escolha = "";
 	}
 	
+	/**
+	 * Método para aumentar a quantidade da aposta em um valor x;
+	 * @param x - valor a ser aumentado na aposta;
+	 */
 	public void aumentaAposta(int x) {
 		apostando += x;
 	}
 	
+	/**
+	 * Método para zerar a aposta;
+	 */
 	public void zeraAposta() {
 		apostando = 0;
 	}
 	
+	/**
+	 * Método para retornar a aposta;
+	 * @return - valor da aposta;
+	 */
 	public int getAposta() {
 		return apostando;
 	}
 	
+	/**
+	 * Método para retornar a quantidade de trocas do jogador;
+	 * @return - quantidade de trocas;
+	 */
 	public int getTrocas() {
 		return trocas;
 	}
 	
+	/**
+	 * Método para definir a quantidade de trocas do jogador;
+	 * @param x - nova quantidade de apostas;
+	 */
 	public void setTrocas(int x) {
 		trocas = x;
 	}
 	
+	/**
+	 * Método para resetar o objeto creditos da classe Moeda;
+	 */
 	public void resetaCreditos() {
 		creditos = new Moeda();
 	}
 	
+	/**
+	 * Método main
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
+		//cria a GUI
 		Gui corpus = new Gui("VIDEO POKER");
+		//Desenha o menu
 		corpus.desenhaMenu();
 	
 	}
 	
+	/**
+	 * Desenha o menu inicial;
+	 */
 	private void desenhaMenu() {
-		/*BEGINNING OF MENU INICIAL*/	
+		/*Limpa tela e adiciona componentes*/
 		this.getContentPane().removeAll();
         this.revalidate();
         this.repaint();
@@ -107,7 +162,11 @@ public class Gui extends JFrame{
 		this.setVisible(true);
 	}
 	
+	/**
+	 * Limpa a tela e desenha a tela de aposta;
+	 */
 	private void mudarTelaAposta() {
+		/*Limpa tela e adiciona componentes*/
 		zeraAposta();
 		this.getContentPane().removeAll();
         this.revalidate();
@@ -245,8 +304,11 @@ public class Gui extends JFrame{
         this.setVisible(true);
 	}
 	
+	/**
+	 * Limpa a tela e desenha a tela da partida;
+	 */
 	private void mudarTelaPartida() {
-		
+		/*Limpa tela e adiciona componentes*/
 		this.getContentPane().removeAll();
         this.revalidate();
         this.repaint();
@@ -388,6 +450,11 @@ public class Gui extends JFrame{
         this.setVisible(true);
 	}
 	
+	/**
+	 * Método par aassociar um objeto da classe Carta a uma imagem 
+	 * @param c - objeto da classe Carta;
+	 * @return - JLabel com a imagem da carta;
+	 */
 	private JLabel associarImagemCarta(Carta c) {
 		JLabel label = new JLabel(new ImageIcon(new ImageIcon("png/carta_"+c.getValor()+"_"+c.getNaipe()+".png").getImage().getScaledInstance(120, 180, Image.SCALE_DEFAULT)));
 		return label;
